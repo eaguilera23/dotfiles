@@ -14,5 +14,3 @@ git commit -m "${commit_message}"
 git push
 
 echo "Updated"
-
-read ok
