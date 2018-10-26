@@ -18,6 +18,7 @@ set showcmd
 "Open this file
 nmap <F12> :tabe ~/.vimrc<CR>
 nmap <F10> :source ~/.vimrc<CR>
+nmap <F9> :! ~/dotfiles/update.sh<CR>
 
 "Toggel NERDTree
 nmap <F1> :NERDTreeToggle<CR>
@@ -69,14 +70,17 @@ imap <leader>i IO.inspect
 nmap <leader>l :set cursorline!<Bar>set cursorcolumn!<CR>
 
 " Blank
-nmap <leader>b :set number!<Bar>set relativenumber!<CR>
+"nmap <leader>b :set number!<Bar>set relativenumber!<CR>
+nmap <leader>b :set number!<CR>
 
 "Close html tags
 map <leader>h ?<<CR>vey$p?<<CR>a/<ESC>$a><ESC>?<<CR>i<CR><CR><ESC>k<leader>o
 
-"Make line numbers invisible
-"nmap <leader>b :set nonumber | set norelativenumber<CR>
-"nmap <leader>B :set number | set relativenumber<CR>
+"Jump to line
+nmap <Space> G
+
+"Active relativenumber
+nmap <leader>r :set relativenumber!<CR>
 
 "Setup yaml files
 "https://www.vim.org/scripts/script.php?script_id=739

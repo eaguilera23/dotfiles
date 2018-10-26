@@ -2,7 +2,7 @@
 
 cd ~/dotfiles
 
-cp -u ~/.vimrc ~/dotfiles/vimrc
+cp ~/.vimrc ~/dotfiles/vimrc
 
 git add .
 
