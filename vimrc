@@ -71,7 +71,7 @@ nmap <leader>l :set cursorline!<Bar>set cursorcolumn!<CR>
 
 " Blank
 "nmap <leader>b :set number!<Bar>set relativenumber!<CR>
-nmap <leader>b :set number!<CR>
+nmap <leader>n :set number!<CR>
 
 "Close html tags
 map <leader>h ?<<CR>vey$p?<<CR>a/<ESC>$a><ESC>?<<CR>i<CR><CR><ESC>k<leader>o
@@ -81,6 +81,9 @@ nmap <Space> G
 
 "Active relativenumber
 nmap <leader>r :set relativenumber!<CR>
+
+"Move windows
+nmap <leader>mw <C-W>
 
 "Setup yaml files
 "https://www.vim.org/scripts/script.php?script_id=739
