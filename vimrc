@@ -18,6 +18,8 @@ set showcmd
 "How many lines vim remember
 set history=500
 
+set ttyfast
+
 "Open this file
 nmap <F12> :tabe ~/.vimrc<CR>
 nmap <F10> :source ~/.vimrc<CR>
@@ -34,10 +36,6 @@ nmap <leader>t :tabnew<CR><F1>
 
 "close tab
 nmap <leader>q :tabclose<CR>
-
-"save and close window
-nmap <leader>w :w<CR>
-nmap <leader>W :wq<CR>
 
 "Move around tabs
 nmap <leader>1 1gt
@@ -87,6 +85,12 @@ nmap <leader>r :set relativenumber!<CR>
 
 "Move windows
 nmap <leader>mw <C-W>
+
+" Move a line of text
+nmap <C-m> mz:m+<cr>`z
+nmap <C-n> mz:m-2<cr>`z
+vmap <C-m> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <C-n> :m'<-2<cr>`>my`<mzgv`yo`z
 
 "Setup yaml files
 "https://www.vim.org/scripts/script.php?script_id=739
