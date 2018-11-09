@@ -15,6 +15,9 @@ let mapleader = "\<Tab>"
 "Show incomplete commands
 set showcmd
 
+"How many lines vim remember
+set history=500
+
 "Open this file
 nmap <F12> :tabe ~/.vimrc<CR>
 nmap <F10> :source ~/.vimrc<CR>
@@ -60,7 +63,7 @@ nmap Q :q<CR>
 nmap <leader>p :CtrlP<CR>
 
 "Search
-map <leader>s /
+map <leader>s :set hls!<CR>
 
 " Elixir investigate
 imap <leader>y IO.puts("YOYOYOYO")
