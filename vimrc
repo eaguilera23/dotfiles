@@ -1,13 +1,22 @@
-execute pathogen#infect()
-syntax on
-filetype plugin indent on
+call plug#begin()
+
+Plug 'scrooloose/nerdtree'
+Plug 'elixir-lang/vim-elixir'
+Plug 'tpope/vim-endwise'
+Plug 'eugen0329/vim-esearch'
+Plug 'srstevenson/vim-trim-whitespace'
+
+call plug#end()
+
+set foldmethod=expr
+set foldexpr=FoldElixir(v:lnum)
+
 set number
 set relativenumber
 autocmd vimenter * NERDTree
 let NERDTreeShowLineNumbers=1
 
 set directory^=$HOME/.vim/tmp//  "organize .swp files
-command Cp :CtrlP
 
 "Change leader
 let mapleader = "\<Tab>"
@@ -92,6 +101,19 @@ nmap <C-n> mz:m-2<cr>`z
 vmap <C-m> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <C-n> :m'<-2<cr>`>my`<mzgv`yo`z
 
+function! FoldElixir(lnum)
+	if getline(a:lnum) =~ '@moduledoc """'
+		echo "yes"
+		return 'a1'
+	elseif getline(a:lnum) =~ '@doc """'
+		return 'a1'
+	elseif getline(a:lnum) =~ '"""'
+		return 's1'
+	else
+		return '='
+	endif
+endfunction
+
 "Setup yaml files
 "https://www.vim.org/scripts/script.php?script_id=739
-au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/yaml.vim
+"au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/yaml.vim
