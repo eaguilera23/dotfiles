@@ -8,8 +8,8 @@ Plug 'srstevenson/vim-trim-whitespace'
 
 call plug#end()
 
-set foldmethod=expr
-set foldexpr=FoldElixir(v:lnum)
+" Folding for elixir files
+autocmd Filetype elixir setlocal foldmethod=expr foldexpr=FoldElixir(v:lnum)
 
 set number
 set relativenumber
@@ -69,11 +69,11 @@ nmap Q :q<CR>
 "Open CTRL-P plugin
 nmap <leader>p :CtrlP<CR>
 
-"Search
+"Search highlight on/off
 map <leader>s :set hls!<CR>
 
 " Elixir investigate
-imap <leader>y IO.puts("YOYOYOYO")
+imap <leader>p IO.puts("YOYOYOYO")
 imap <leader>i IO.inspect
 
 " Cursor line and column
@@ -101,6 +101,7 @@ nmap <C-n> mz:m-2<cr>`z
 vmap <C-m> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <C-n> :m'<-2<cr>`>my`<mzgv`yo`z
 
+" Fold documentation in elixir projects
 function! FoldElixir(lnum)
 	if getline(a:lnum) =~ '@moduledoc """'
 		echo "yes"
