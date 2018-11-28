@@ -63,7 +63,7 @@ nmap <leader>w /\u<CR>
 "Change word until next capital letter
 nmap <leader>cw v/\u<CR>hc
 
-"Quit window
+"Quit window and delete buffer
 nmap Q :q<CR>
 
 "Open CTRL-P plugin
@@ -103,12 +103,13 @@ vmap <C-n> :m'<-2<cr>`>my`<mzgv`yo`z
 
 " Fold documentation in elixir projects
 function! FoldElixir(lnum)
-	if getline(a:lnum) =~ '@moduledoc """'
-		echo "yes"
+	let line=getline(a:lnum)
+	if line=~ '@moduledoc """'
+		"echo "yes"
 		return 'a1'
-	elseif getline(a:lnum) =~ '@doc """'
+	elseif line =~ '@doc """'
 		return 'a1'
-	elseif getline(a:lnum) =~ '"""'
+	elseif line =~ '"""'
 		return 's1'
 	else
 		return '='
