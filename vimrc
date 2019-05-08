@@ -1,10 +1,14 @@
 call plug#begin()
 
+Plug 'https://github.com/leafgarland/typescript-vim.git'
 Plug 'scrooloose/nerdtree'
 Plug 'elixir-lang/vim-elixir'
 Plug 'tpope/vim-endwise'
 Plug 'eugen0329/vim-esearch'
 Plug 'srstevenson/vim-trim-whitespace'
+Plug 'bling/vim-bufferline'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
@@ -15,14 +19,38 @@ set number
 set relativenumber
 autocmd vimenter * NERDTree
 let NERDTreeShowLineNumbers=1
+let g:NERDTreeNodeDelimiter = "\u00a0" " Bug that makes ^G to appear
+
+let g:esearch = {
+  \ 'adapter':          'grep',
+  \ 'backend':          'vim8',
+  \ 'out':              'win',
+  \ 'batch_size':       1000,
+  \ 'use':              ['visual', 'hlsearch', 'last'],
+  \ 'default_mappings': 1,
+  \}
 
 set directory^=$HOME/.vim/tmp//  "organize .swp files
-
 "Change leader
 let mapleader = "\<Tab>"
 
+"""""""""""""""""""
+""AIRLINE""""""""""
+let g:airline#extensions#tabline#enabled = 1
+"let g:airline_powerline_fonts = 1
+""let g:airline_theme='powerlineish'
+""let g:airline#extensions#syntastic#enabled = 1
+"set laststatus=2
+""""""""""""""""""""""""""""
+
 "Show incomplete commands
 set showcmd
+
+" visual autocomplete for command menu
+set wildmenu
+
+" redraw only when needed
+set lazyredraw
 
 "How many lines vim remember
 set history=500
@@ -73,7 +101,7 @@ nmap <leader>p :CtrlP<CR>
 map <leader>s :set hls!<CR>
 
 " Elixir investigate
-imap <leader>p IO.puts("YOYOYOYO")
+imap <leader>p IO.puts "
 imap <leader>i IO.inspect
 
 " Cursor line and column
@@ -81,7 +109,7 @@ nmap <leader>l :set cursorline!<Bar>set cursorcolumn!<CR>
 
 " Blank
 "nmap <leader>b :set number!<Bar>set relativenumber!<CR>
-nmap <leader>n :set number!<CR>
+"nmap <leader>n :set number!<CR>
 
 "Close html tags
 map <leader>h ?<<CR>vey$p?<<CR>a/<ESC>$a><ESC>?<<CR>i<CR><CR><ESC>k<leader>o
@@ -100,6 +128,11 @@ nmap <C-m> mz:m+<cr>`z
 nmap <C-n> mz:m-2<cr>`z
 vmap <C-m> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <C-n> :m'<-2<cr>`>my`<mzgv`yo`z
+
+" Buffer actions
+nmap <leader>n :bnext<CR>
+nmap <leader>b :bprevious<CR>
+nmap <leader>x :bdelete<CR>
 
 " Fold documentation in elixir projects
 function! FoldElixir(lnum)
