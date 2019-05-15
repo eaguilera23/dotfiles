@@ -15,8 +15,14 @@ call plug#end()
 " Folding for elixir files
 autocmd Filetype elixir setlocal foldmethod=expr foldexpr=FoldElixir(v:lnum)
 
+" Basic config
+"filetype plugin indent on
 set number
 set relativenumber
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
 autocmd vimenter * NERDTree
 let NERDTreeShowLineNumbers=1
 let g:NERDTreeNodeDelimiter = "\u00a0" " Bug that makes ^G to appear
@@ -43,6 +49,9 @@ let g:airline#extensions#tabline#enabled = 1
 "set laststatus=2
 """"""""""""""""""""""""""""
 
+" No Vi compatibility
+set nocompatible
+
 "Show incomplete commands
 set showcmd
 
@@ -56,6 +65,14 @@ set lazyredraw
 set history=500
 
 set ttyfast
+
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set wildignore+=*/deps/*,*/node_modules/*
+set path+=**
+
+" Create the `tags` file (may need to install ctags first)
+command! MakeTags !ctags -R --exclude=.git --exclude=node_modules
 
 "Open this file
 nmap <F12> :tabe ~/.vimrc<CR>
@@ -101,8 +118,8 @@ nmap <leader>p :CtrlP<CR>
 map <leader>s :set hls!<CR>
 
 " Elixir investigate
-imap <leader>p IO.puts "
-imap <leader>i IO.inspect
+nmap <C-p> iIO.puts "<Esc>
+nmap <C-i> iIO.inspect<Esc>
 
 " Cursor line and column
 nmap <leader>l :set cursorline!<Bar>set cursorcolumn!<CR>
