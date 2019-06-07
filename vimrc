@@ -22,6 +22,11 @@ set relativenumber
 set tabstop=2
 set shiftwidth=2
 set expandtab
+set undofile " Persistent undo
+
+ab eins IO.inspect
+ab eput IO.puts("
+ab elog Logger.info("
 
 autocmd vimenter * NERDTree
 let NERDTreeShowLineNumbers=1
@@ -64,15 +69,22 @@ set lazyredraw
 "How many lines vim remember
 set history=500
 
+" always show statusline (even with only single window)
+set laststatus=2
+
 set ttyfast
 
 " Search down into subfolders
 " Provides tab-completion for all file-related tasks
 set wildignore+=*/deps/*,*/node_modules/*
-set path+=**
+set path=$PWD/**
 
 " Create the `tags` file (may need to install ctags first)
-command! MakeTags !ctags -R --exclude=.git --exclude=node_modules
+command! MakeTags !ctags -R --exclude=.git --exclude=node_modules --exclude=deps
+
+" When wrapped lines, don't skip the fake line
+nmap j gj
+nmap k gk
 
 "Open this file
 nmap <F12> :tabe ~/.vimrc<CR>
@@ -119,7 +131,7 @@ map <leader>s :set hls!<CR>
 
 " Elixir investigate
 nmap <C-p> iIO.puts "<Esc>
-nmap <C-i> iIO.inspect<Esc>
+nmap <C-P> iIO.inspect<Esc>
 
 " Cursor line and column
 nmap <leader>l :set cursorline!<Bar>set cursorcolumn!<CR>
@@ -135,7 +147,7 @@ map <leader>h ?<<CR>vey$p?<<CR>a/<ESC>$a><ESC>?<<CR>i<CR><CR><ESC>k<leader>o
 nmap <Space> G
 
 "Active relativenumber
-nmap <leader>r :set relativenumber!<CR>
+nmap <leader>r :set relativenumber!<Bar>set number!<CR>
 
 "Move windows
 nmap <leader>mw <C-W>
@@ -150,6 +162,19 @@ vmap <C-n> :m'<-2<cr>`>my`<mzgv`yo`z
 nmap <leader>n :bnext<CR>
 nmap <leader>b :bprevious<CR>
 nmap <leader>x :bdelete<CR>
+
+" Resizing the window
+nmap ≥ :vertical res +5<CR>
+nmap ≤ :vertical res -5<CR>
+nmap <M-Down> :res -5<CR>
+nmap <M-Up> :res +5<CR>
+
+" Replace word under cursor
+nmap <leader>* :%s/<c-r><c-w>//g<left><left>
+
+" Commenting made easy
+nmap <leader># ^i#<Esc>
+vmap <leader>3 I#<Esc>
 
 " Fold documentation in elixir projects
 function! FoldElixir(lnum)
