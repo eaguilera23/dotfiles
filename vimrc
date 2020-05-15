@@ -1,12 +1,17 @@
 call plug#begin()
 
-Plug 'https://github.com/leafgarland/typescript-vim.git'
+"Plug 'https://github.com/leafgarland/typescript-vim.git'
 Plug 'scrooloose/nerdtree'
 Plug 'elixir-lang/vim-elixir'
 Plug 'tpope/vim-endwise'
 Plug 'eugen0329/vim-esearch'
 Plug 'srstevenson/vim-trim-whitespace'
 Plug 'bling/vim-bufferline'
+Plug 'previm/previm'
+Plug 'mhinz/vim-mix-format'
+"Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 
@@ -27,17 +32,25 @@ set undofile " Persistent undo
 ab eins IO.inspect
 ab eput IO.puts("
 ab elog Logger.info("
+ab jcl console.log(
+ab jstr JSON.stringify(
 
 autocmd vimenter * NERDTree
 let NERDTreeShowLineNumbers=1
 let g:NERDTreeNodeDelimiter = "\u00a0" " Bug that makes ^G to appear
 
+if isdirectory(expand(".git"))
+  let g:NERDTreeBookmarksFile = '.git/.nerdtree-bookmarks'
+endif
+
+let g:previm_open_cmd = 'open -a Safari'
+
 let g:esearch = {
-  \ 'adapter':          'grep',
+  \ 'adapter':          'ag',
   \ 'backend':          'vim8',
   \ 'out':              'win',
   \ 'batch_size':       1000,
-  \ 'use':              ['visual', 'hlsearch', 'last'],
+  \ 'use':              ['visual', 'hlsearch'],
   \ 'default_mappings': 1,
   \}
 
@@ -60,9 +73,6 @@ set nocompatible
 "Show incomplete commands
 set showcmd
 
-" visual autocomplete for command menu
-set wildmenu
-
 " redraw only when needed
 set lazyredraw
 
@@ -74,10 +84,16 @@ set laststatus=2
 
 set ttyfast
 
+" visual autocomplete for command menu
+set wildmenu
+
 " Search down into subfolders
 " Provides tab-completion for all file-related tasks
-set wildignore+=*/deps/*,*/node_modules/*
 set path=$PWD/**
+set wildignore+=*/deps/*
+set wildignore+=*/node_modules/*
+set wildignore+=*/dist/*
+set wildignore+=*/support/*
 
 " Create the `tags` file (may need to install ctags first)
 command! MakeTags !ctags -R --exclude=.git --exclude=node_modules --exclude=deps
@@ -123,6 +139,9 @@ nmap <leader>cw v/\u<CR>hc
 "Quit window and delete buffer
 nmap Q :q<CR>
 
+" Move to buffer
+nmap , :b
+
 "Open CTRL-P plugin
 nmap <leader>p :CtrlP<CR>
 
@@ -130,7 +149,6 @@ nmap <leader>p :CtrlP<CR>
 map <leader>s :set hls!<CR>
 
 " Elixir investigate
-nmap <C-p> iIO.puts "<Esc>
 nmap <C-P> iIO.inspect<Esc>
 
 " Cursor line and column
@@ -178,6 +196,10 @@ vmap <leader>3 I#<Esc>
 
 " Fold documentation in elixir projects
 function! FoldElixir(lnum)
+  if &ft =~ '_test.exs'
+    return
+  endif
+
 	let line=getline(a:lnum)
 	if line=~ '@moduledoc """'
 		"echo "yes"
