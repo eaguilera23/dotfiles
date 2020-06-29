@@ -12,6 +12,7 @@ Plug 'mhinz/vim-mix-format'
 "Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
+Plug 'gabrielelana/vim-markdown'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 
@@ -19,6 +20,9 @@ call plug#end()
 
 " Folding for elixir files
 autocmd Filetype elixir setlocal foldmethod=expr foldexpr=FoldElixir(v:lnum)
+
+"wrap text for markdown
+au BufRead,BufNewFile *.md setlocal textwidth=120
 
 " Basic config
 "filetype plugin indent on
