@@ -13,6 +13,7 @@ Plug 'mhinz/vim-mix-format'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'gabrielelana/vim-markdown'
+Plug 'skywind3000/asyncrun.vim'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 
@@ -31,7 +32,13 @@ set relativenumber
 set tabstop=2
 set shiftwidth=2
 set expandtab
-set undofile " Persistent undo
+
+" Let's save undo info!
+if !isdirectory($HOME."/.vim/undo-dir")
+    call mkdir($HOME."/.vim/undo-dir", "p", 0700)
+endif
+set undodir=~/.vim/undo-dir
+set undofile
 
 ab eins IO.inspect
 ab eput IO.puts("
@@ -188,8 +195,8 @@ nmap <leader>x :bdelete<CR>
 " Resizing the window
 nmap ≥ :vertical res +5<CR>
 nmap ≤ :vertical res -5<CR>
-nmap <M-Down> :res -5<CR>
-nmap <M-Up> :res +5<CR>
+nmap <leader>k :res +5<CR>
+nmap <leader>j :res -5<CR>
 
 " Replace word under cursor
 nmap <leader>* :%s/<c-r><c-w>//g<left><left>
@@ -197,6 +204,18 @@ nmap <leader>* :%s/<c-r><c-w>//g<left><left>
 " Commenting made easy
 nmap <leader># ^i#<Esc>
 vmap <leader>3 I#<Esc>
+
+"" AsyncRun
+let g:asyncrun_open = 8 " Open the quickfix window
+
+" common async run command
+nmap <leader>ar :AsyncRun -mode=term -rows=20
+
+" async run mix test
+nmap <leader>mt <leader>ar -focus=0 mix test %:p<CR>
+
+" async run git diff
+nmap <leader>gd <leader>ar git diff<CR>
 
 " Fold documentation in elixir projects
 function! FoldElixir(lnum)
