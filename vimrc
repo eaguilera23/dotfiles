@@ -4,7 +4,7 @@ call plug#begin()
 Plug 'scrooloose/nerdtree'
 Plug 'elixir-lang/vim-elixir'
 Plug 'tpope/vim-endwise'
-Plug 'eugen0329/vim-esearch'
+Plug 'eugen0329/vim-esearch' "To make this work, install the silver surfer searcher (ag)
 Plug 'srstevenson/vim-trim-whitespace'
 Plug 'bling/vim-bufferline'
 Plug 'previm/previm'
@@ -18,6 +18,9 @@ Plug 'skywind3000/asyncrun.vim'
 "Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
+
+"Change leader
+let mapleader = "\<Tab>"
 
 " Folding for elixir files
 autocmd Filetype elixir setlocal foldmethod=expr foldexpr=FoldElixir(v:lnum)
@@ -65,9 +68,12 @@ let g:esearch = {
   \ 'default_mappings': 1,
   \}
 
-set directory^=$HOME/.vim/tmp//  "organize .swp files
-"Change leader
-let mapleader = "\<Tab>"
+"organize .swp files
+if !isdirectory($HOME . "/.vim/tmp")
+    call mkdir($HOME . "/.vim/tmp", "p", 0700)
+endif
+
+set directory^=$HOME/.vim/tmp//
 
 """""""""""""""""""
 ""AIRLINE""""""""""
