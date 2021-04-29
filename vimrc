@@ -28,6 +28,11 @@ autocmd Filetype elixir setlocal foldmethod=expr foldexpr=FoldElixir(v:lnum)
 "wrap text for markdown
 au BufRead,BufNewFile *.md setlocal textwidth=120
 
+" Delimit git commits for its content
+" it is meant to be used with the command `git commit -m "Title" -e
+hi ColorColumn ctermbg=DarkGrey guibg=DarkGrey
+au BufRead,BufNewFile COMMIT_EDITMSG setlocal colorcolumn=73
+
 " Basic config
 "filetype plugin indent on
 set number
@@ -46,10 +51,11 @@ set undofile
 ab eins IO.inspect
 ab eput IO.puts("
 ab elog Logger.info("
-ab jcl console.log(
-ab jstr JSON.stringify(
 
-autocmd vimenter * NERDTree
+" Automatically open NERDTree unless file is on `filetypeToIgnore`
+let filetypeToIgnore = ['gitcommit']
+autocmd vimenter * if index(filetypeToIgnore, &ft) < 0 | NERDTree
+
 let NERDTreeShowLineNumbers=1
 let g:NERDTreeNodeDelimiter = "\u00a0" " Bug that makes ^G to appear
 
