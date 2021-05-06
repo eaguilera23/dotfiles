@@ -14,6 +14,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'gabrielelana/vim-markdown'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'vim-ruby/vim-ruby'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 
@@ -53,7 +54,7 @@ ab eput IO.puts("
 ab elog Logger.info("
 
 " Automatically open NERDTree unless file is on `filetypeToIgnore`
-let filetypeToIgnore = ['gitcommit']
+let filetypeToIgnore = ['gitcommit', 'zsh']
 autocmd vimenter * if index(filetypeToIgnore, &ft) < 0 | NERDTree
 
 let NERDTreeShowLineNumbers=1
