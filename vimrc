@@ -15,6 +15,7 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'gabrielelana/vim-markdown'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 
