@@ -31,6 +31,9 @@ autocmd Filetype elixir setlocal foldmethod=expr foldexpr=FoldElixir(v:lnum)
 "wrap text for markdown
 au BufRead,BufNewFile *.md setlocal textwidth=120
 
+" Set filetype for my personal zshrc
+au BufRead .zshrc-custom setfiletype zsh
+
 " Delimit git commits for its content
 " it is meant to be used with the command `git commit -m "Title" -e
 hi ColorColumn ctermbg=DarkGrey guibg=DarkGrey

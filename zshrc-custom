@@ -1,0 +1,21 @@
+alias gs="git status"
+alias commit="git commit -e -m"
+alias fixup="git commit --fixup HEAD"
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir rbenv vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)
+
+killbranch() {
+  local current_branch=`git symbolic-ref --short HEAD`
+
+  echo "git checkout master"
+  gco master
+
+  echo "git fetch and reset hard with origin/master"
+  git fetch && git reset --hard origin/master
+
+  echo "soft deleting branch ${current_branch}"
+  git branch -d "${current_branch}"
+
+  echo "Done"
+}
