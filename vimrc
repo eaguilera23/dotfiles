@@ -34,7 +34,10 @@ let mapleader = "\<Tab>"
 autocmd Filetype elixir setlocal foldmethod=expr foldexpr=FoldElixir(v:lnum)
 
 " Fold color (Purple)
+" font
 hi Folded ctermfg=062
+" background
+hi Folded ctermbg=232
 
 " Disable folding by default
 set nofoldenable
@@ -49,9 +52,6 @@ au BufRead .zshrc-custom setfiletype zsh
 " it is meant to be used with the command `git commit -m "Title" -e
 hi ColorColumn ctermbg=DarkGrey guibg=DarkGrey
 au BufRead,BufNewFile COMMIT_EDITMSG setlocal colorcolumn=73
-
-" Folding colors
-hi Folded ctermbg=232
 
 " Basic config
 "filetype plugin indent on
