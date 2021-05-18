@@ -17,16 +17,27 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'kchmck/vim-coffee-script'
+Plug 'vim-utils/vim-ruby-fold'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
+
+"""""""""" COLORS """""""""""""""
+" https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
+"""""""""""""""""""""""""""""""""
 
 "Change leader
 let mapleader = "\<Tab>"
 
 " Folding for elixir files
 autocmd Filetype elixir setlocal foldmethod=expr foldexpr=FoldElixir(v:lnum)
+
+" Fold color (Purple)
+hi Folded ctermfg=062
+
+" Disable folding by default
+set nofoldenable
 
 "wrap text for markdown
 au BufRead,BufNewFile *.md setlocal textwidth=120
@@ -38,6 +49,9 @@ au BufRead .zshrc-custom setfiletype zsh
 " it is meant to be used with the command `git commit -m "Title" -e
 hi ColorColumn ctermbg=DarkGrey guibg=DarkGrey
 au BufRead,BufNewFile COMMIT_EDITMSG setlocal colorcolumn=73
+
+" Folding colors
+hi Folded ctermbg=232
 
 " Basic config
 "filetype plugin indent on
