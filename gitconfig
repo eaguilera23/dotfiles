@@ -8,3 +8,5 @@
 [core]
 	excludesfile = /Users/eduardoaguileraolascoaga/.gitignore_global
   pager = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
+[init]
+	defaultBranch = master

@@ -27,7 +27,7 @@ call plug#end()
 " https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
 """""""""""""""""""""""""""""""""
 
-"Change leader
+" Change leader
 let mapleader = "\<Tab>"
 
 " Folding for elixir files
@@ -35,7 +35,7 @@ autocmd Filetype elixir setlocal foldmethod=expr foldexpr=FoldElixir(v:lnum)
 
 " Fold color (Purple)
 " font
-hi Folded ctermfg=062
+hi Folded ctermfg=160
 " background
 hi Folded ctermbg=232
 
@@ -52,6 +52,14 @@ au BufRead .zshrc-custom setfiletype zsh
 " it is meant to be used with the command `git commit -m "Title" -e
 hi ColorColumn ctermbg=DarkGrey guibg=DarkGrey
 au BufRead,BufNewFile COMMIT_EDITMSG setlocal colorcolumn=73
+
+" Jenkins
+au BufNewFile,BufRead Jenkinsfile call JenkinsSyntax()
+
+function JenkinsSyntax()
+  setlocal regexpengine=0
+  setfiletype groovy
+endfunction
 
 " Basic config
 "filetype plugin indent on
@@ -141,6 +149,9 @@ set wildignore+=*/support/*
 " Create the `tags` file (may need to install ctags first)
 command! MakeTags !ctags -R --exclude=.git --exclude=node_modules --exclude=deps
 
+" Set/Unset spell checking
+command! Spell set spell!
+
 " When wrapped lines, don't skip the fake line
 nmap j gj
 nmap k gk
@@ -225,6 +236,7 @@ nmap <leader>b :bprevious<CR>
 nmap <leader>x :bdelete<CR>
 
 " Resizing the window
+" ≥ Is ALT + >
 nmap ≥ :vertical res +5<CR>
 nmap ≤ :vertical res -5<CR>
 nmap <leader>k :res +5<CR>
@@ -248,6 +260,9 @@ nmap <leader>mt <leader>ar -focus=0 mix test %:p<CR>
 
 " async run git diff
 nmap <leader>gd <leader>ar git diff<CR>
+
+" Count ocurrences of the word
+command -nargs=1 C :%s/<args>//gn
 
 " Fold documentation in elixir projects
 function! FoldElixir(lnum)
