@@ -18,6 +18,8 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'kchmck/vim-coffee-script'
 Plug 'vim-utils/vim-ruby-fold'
+Plug 'wesQ3/vim-windowswap'
+Plug 'gcmt/taboo.vim'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 
@@ -79,6 +81,7 @@ set undofile
 ab eins IO.inspect
 ab eput IO.puts("
 ab elog Logger.info("
+ab rbp require 'pry'<CR>binding.pry
 
 " Automatically open NERDTree unless file is on `filetypeToIgnore`
 let filetypeToIgnore = ['gitcommit', 'zsh']
@@ -133,6 +136,9 @@ set history=500
 " always show statusline (even with only single window)
 set laststatus=2
 
+" Show buffernumber on the bufferline
+let g:bufferline_show_bufnr = 1
+
 set ttyfast
 
 " visual autocomplete for command menu
@@ -186,15 +192,12 @@ nmap <C-j> <C-w>j
 nmap <C-h> <C-w>h
 
 "Move to next capital letter
-nmap <leader>w /\u<CR>
+" nmap <leader>w /\u<CR>
 "Change word until next capital letter
 nmap <leader>cw v/\u<CR>hc
 
 "Quit window and delete buffer
 nmap Q :q<CR>
-
-" Move to buffer
-nmap , :b
 
 "Open CTRL-P plugin
 nmap <leader>p :CtrlP<CR>
@@ -248,6 +251,9 @@ nmap <leader>* :%s/<c-r><c-w>//g<left><left>
 " Commenting made easy
 nmap <leader># ^i#<Esc>
 vmap <leader>3 I#<Esc>
+
+" find on buffer
+nmap <leader>, :b<SPACE>
 
 "" AsyncRun
 let g:asyncrun_open = 8 " Open the quickfix window
