@@ -35,6 +35,9 @@ let mapleader = "\<Tab>"
 " Folding for elixir files
 autocmd Filetype elixir setlocal foldmethod=expr foldexpr=FoldElixir(v:lnum)
 
+" Return to last edit position when opening files (You want this!) Credit: Felipe Renan
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
 " Fold color (Purple)
 " font
 hi Folded ctermfg=160
@@ -80,8 +83,9 @@ set undofile
 
 ab eins IO.inspect
 ab eput IO.puts("
+ab epry require IEx<CR>IEx.pry
 ab elog Logger.info("
-ab rbp require 'pry'<CR>binding.pry
+ab rpry require 'pry'<CR>binding.pry
 
 " Automatically open NERDTree unless file is on `filetypeToIgnore`
 let filetypeToIgnore = ['gitcommit', 'zsh']
@@ -104,6 +108,9 @@ let g:esearch = {
   \ 'use':              ['visual', 'hlsearch'],
   \ 'default_mappings': 1,
   \}
+
+let g:esearch.name = '[esearch]'
+let g:esearch.win_new = {esearch -> esearch#buf#goto_or_open(esearch.name, 'vsplit')}
 
 "organize .swp files
 if !isdirectory($HOME . "/.vim/tmp")
@@ -266,6 +273,9 @@ nmap <leader>mt <leader>ar -focus=0 mix test %:p<CR>
 
 " async run git diff
 nmap <leader>gd <leader>ar git diff<CR>
+
+" insert date
+nmap <leader>d :r! date<CR>
 
 " Count ocurrences of the word
 command -nargs=1 C :%s/<args>//gn

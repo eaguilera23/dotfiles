@@ -1,6 +1,7 @@
 alias gs="git status"
 alias commit="git commit -e -m"
 alias fixup="git commit --fixup HEAD"
+alias aamend="git commit -a --amend --no-edit"
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir rbenv vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)

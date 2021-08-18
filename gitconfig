@@ -10,3 +10,11 @@
   pager = /usr/local/share/git-core/contrib/diff-highlight/diff-highlight | less
 [init]
 	defaultBranch = master
+[githooks]
+	cloneUrl = https://github.com/rycus86/githooks.git
+	cloneBranch = master
+	shared = no
+[alias]
+	hooks = !\"/Users/eduardoaguileraolascoaga/.githooks/bin/githooks\"
+[githooks "autoupdate"]
+	lastrun = 1626425487

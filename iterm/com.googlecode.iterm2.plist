@@ -58523,7 +58523,7 @@
 	<key>ShowFullScreenTabBar</key>
 	<true/>
 	<key>ShowMetalFPSmeter</key>
-	<true/>
+	<false/>
 	<key>ShowNewOutputIndicator</key>
 	<true/>
 	<key>ShowPaneTitles</key>
