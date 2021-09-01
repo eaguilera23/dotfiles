@@ -5,7 +5,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'elixir-lang/vim-elixir'
 Plug 'tpope/vim-endwise'
 Plug 'eugen0329/vim-esearch' "To make this work, install the silver surfer searcher (ag)
-Plug 'srstevenson/vim-trim-whitespace'
+Plug 'srstevenson/vim-topiary'
 Plug 'bling/vim-bufferline'
 Plug 'previm/previm'
 Plug 'mhinz/vim-mix-format'
@@ -34,6 +34,9 @@ let mapleader = "\<Tab>"
 
 " Folding for elixir files
 autocmd Filetype elixir setlocal foldmethod=expr foldexpr=FoldElixir(v:lnum)
+
+" Don't delete empty lines for yaml files
+autocmd Filetype yaml TopiaryDisableBuffer
 
 " Return to last edit position when opening files (You want this!) Credit: Felipe Renan
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -246,9 +249,10 @@ nmap <leader>b :bprevious<CR>
 nmap <leader>x :bdelete<CR>
 
 " Resizing the window
-" ≥ Is ALT + >
-nmap ≥ :vertical res +5<CR>
-nmap ≤ :vertical res -5<CR>
+" ∆ == ALT + j
+" ˚ == ALT + k
+nmap ˚ :vertical res +5<CR>
+nmap ∆ :vertical res -5<CR>
 nmap <leader>k :res +5<CR>
 nmap <leader>j :res -5<CR>
 
@@ -276,6 +280,12 @@ nmap <leader>gd <leader>ar git diff<CR>
 
 " insert date
 nmap <leader>d :r! date<CR>
+
+" Window swapping
+let g:windowswap_map_keys = 0 "prevent default bindings
+nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<CR>
+nnoremap <silent> <leader>wy :call WindowSwap#MarkWindowSwap()<CR>
+nnoremap <silent> <leader>w :call WindowSwap#DoWindowSwap()<CR>
 
 " Count ocurrences of the word
 command -nargs=1 C :%s/<args>//gn
