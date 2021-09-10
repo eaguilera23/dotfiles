@@ -32,6 +32,9 @@ call plug#end()
 " Change leader
 let mapleader = "\<Tab>"
 
+" Split right
+set splitright
+
 " Folding for elixir files
 autocmd Filetype elixir setlocal foldmethod=expr foldexpr=FoldElixir(v:lnum)
 
@@ -122,7 +125,7 @@ let g:esearch = {
   \}
 
 let g:esearch.name = '[esearch]'
-let g:esearch.win_new = {esearch -> esearch#buf#goto_or_open(esearch.name, 'vsplit')}
+let g:esearch.win_new = {esearch -> esearch#buf#goto_or_open(esearch.name, 'vne')}
 
 "organize .swp files
 if !isdirectory($HOME . "/.vim/tmp")
