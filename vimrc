@@ -35,6 +35,12 @@ let mapleader = "\<Tab>"
 " Folding for elixir files
 autocmd Filetype elixir setlocal foldmethod=expr foldexpr=FoldElixir(v:lnum)
 
+" Folding vim-javascript
+augroup javascript_folding
+    au!
+    au FileType javascript setlocal foldmethod=syntax
+augroup END
+
 " Don't delete empty lines for yaml files
 autocmd Filetype yaml TopiaryDisableBuffer
 
@@ -63,6 +69,9 @@ au BufRead,BufNewFile COMMIT_EDITMSG setlocal colorcolumn=73
 
 " Jenkins
 au BufNewFile,BufRead Jenkinsfile call JenkinsSyntax()
+
+" Open images
+autocmd BufEnter *.png,*.jpg,*gif exec "! open ".expand("%:gs/./\\&/:p")
 
 function JenkinsSyntax()
   setlocal regexpengine=0
