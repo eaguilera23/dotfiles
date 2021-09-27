@@ -268,10 +268,10 @@ nmap <leader>b :bprevious<CR>
 nmap <leader>x :bdelete<CR>
 
 " Resizing the window
-" ∆ == ALT + j
-" ˚ == ALT + k
-nmap ˚ :vertical res +5<CR>
-nmap ∆ :vertical res -5<CR>
+" ˙ == ALT + h
+" ¬ == ALT + l
+nmap ˙ :vertical res +5<CR>
+nmap ¬ :vertical res -5<CR>
 nmap <leader>k :res +5<CR>
 nmap <leader>j :res -5<CR>
 
