@@ -29,6 +29,12 @@ call plug#end()
 " https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
 """""""""""""""""""""""""""""""""
 
+""""" DOCS """""""""""
+" StatusLine is the window bar of an active window
+" StatusLineNC is the bar of non-active windows
+" I'm currently using ctermfg colors
+" To check the highlights you can use highlight command
+
 " Change leader
 let mapleader = "\<Tab>"
 
@@ -126,6 +132,7 @@ let g:esearch = {
 
 let g:esearch.name = '[esearch]'
 let g:esearch.win_new = {esearch -> esearch#buf#goto_or_open(esearch.name, 'vne')}
+let g:esearch.live_update = 0
 
 "organize .swp files
 if !isdirectory($HOME . "/.vim/tmp")
