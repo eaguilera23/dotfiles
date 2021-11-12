@@ -20,6 +20,8 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'vim-utils/vim-ruby-fold'
 Plug 'wesQ3/vim-windowswap'
 Plug 'gcmt/taboo.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 
@@ -40,6 +42,8 @@ let mapleader = "\<Tab>"
 
 " Split right
 set splitright
+" Split below
+set splitbelow
 
 " Folding for elixir files
 autocmd Filetype elixir setlocal foldmethod=expr foldexpr=FoldElixir(v:lnum)
@@ -51,7 +55,7 @@ augroup javascript_folding
 augroup END
 
 " Don't delete empty lines for yaml files
-autocmd Filetype yaml TopiaryDisableBuffer
+autocmd Filetype yaml,sql TopiaryDisableBuffer
 
 " Return to last edit position when opening files (You want this!) Credit: Felipe Renan
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -107,6 +111,7 @@ ab eput IO.puts("
 ab epry require IEx<CR>IEx.pry
 ab elog Logger.info("
 ab rpry require 'pry'<CR>binding.pry
+ab jlog console.log("
 
 " Automatically open NERDTree unless file is on `filetypeToIgnore`
 let filetypeToIgnore = ['gitcommit', 'zsh']
