@@ -10,8 +10,9 @@ Plug 'bling/vim-bufferline'
 Plug 'previm/previm'
 Plug 'mhinz/vim-mix-format'
 Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'peitalin/vim-jsx-typescript'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'gabrielelana/vim-markdown'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'vim-ruby/vim-ruby'
@@ -169,6 +170,10 @@ set history=500
 
 " always show statusline (even with only single window)
 set laststatus=2
+set statusline=
+set statusline+=%f\:                          " filename
+set statusline+=%-2.3n\                     " buffer number
+set statusline+=%h%m%r%w                     " status flags
 
 " Show buffernumber on the bufferline
 let g:bufferline_show_bufnr = 1
