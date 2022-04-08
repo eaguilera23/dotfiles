@@ -23,6 +23,7 @@ Plug 'wesQ3/vim-windowswap'
 Plug 'gcmt/taboo.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
+Plug 'rhysd/vim-syntax-codeowners'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 
@@ -318,6 +319,9 @@ nnoremap <silent> <leader>w :call WindowSwap#DoWindowSwap()<CR>
 
 " Count ocurrences of the word
 command -nargs=1 C :%s/<args>//gn
+
+" Paste into the clipboard the current buffer's file path
+command CopyPath :let @* = expand("%")
 
 " Fold documentation in elixir projects
 function! FoldElixir(lnum)
