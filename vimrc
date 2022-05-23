@@ -110,7 +110,7 @@ set undofile
 
 ab eins IO.inspect
 ab eput IO.puts("
-ab epry require IEx<CR>IEx.pry
+ab epry require IEx; IEx.pry
 ab elog Logger.info("
 ab rpry require 'pry'<CR>binding.pry
 ab jlog console.log("
@@ -209,6 +209,12 @@ nmap <F9> :! ~/dotfiles/update.sh<CR>
 
 "Toggel NERDTree
 nmap <F1> :NERDTreeToggle<CR>
+
+"Save Session
+nmap <F2> :SessionSave<CR>
+
+"Load Session
+nmap <F3> :SessionLoad<CR>
 
 "Let auto identation put cursor where it should be
 nmap <leader>o ddO
@@ -318,10 +324,31 @@ nnoremap <silent> <leader>wy :call WindowSwap#MarkWindowSwap()<CR>
 nnoremap <silent> <leader>w :call WindowSwap#DoWindowSwap()<CR>
 
 " Count ocurrences of the word
-command -nargs=1 C :%s/<args>//gn
+command -nargs=1 Count :%s/<args>//gn
 
 " Paste into the clipboard the current buffer's file path
 command CopyPath :let @* = expand("%")
+
+command SessionSave :call FuncSaveSession()
+command SessionLoad :call FuncLoadSession()
+
+function FuncSaveSession()
+  let session_path = "~/.vim/sessions/"
+
+  let current_directory = getcwd()
+  let session_name = session_path . substitute(current_directory, "/", "_", "g") . ".vim"
+  echo session_name
+  execute "mks!" . session_name
+endfunction
+
+function FuncLoadSession()
+  let session_path = "~/.vim/sessions/"
+
+  let current_directory = getcwd()
+  let session_name = session_path . substitute(current_directory, "/", "_", "g") . ".vim"
+  echo session_name
+  execute "source" . session_name
+endfunction
 
 " Fold documentation in elixir projects
 function! FoldElixir(lnum)
