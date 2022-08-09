@@ -24,6 +24,7 @@ Plug 'gcmt/taboo.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'rhysd/vim-syntax-codeowners'
+Plug 'hashivim/vim-terraform'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 
