@@ -25,6 +25,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'rhysd/vim-syntax-codeowners'
 Plug 'hashivim/vim-terraform'
+Plug 'martinda/Jenkinsfile-vim-syntax'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 
@@ -84,7 +85,7 @@ hi ColorColumn ctermbg=DarkGrey guibg=DarkGrey
 au BufRead,BufNewFile COMMIT_EDITMSG setlocal colorcolumn=73
 
 " Jenkins
-au BufNewFile,BufRead Jenkinsfile call JenkinsSyntax()
+" au BufNewFile,BufRead Jenkinsfile call JenkinsSyntax()
 
 " Open images
 autocmd BufEnter *.png,*.jpg,*gif exec "! open ".expand("%:gs/./\\&/:p")
