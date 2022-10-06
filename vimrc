@@ -200,6 +200,10 @@ command! MakeTags !ctags -R --exclude=.git --exclude=node_modules --exclude=deps
 " Set/Unset spell checking
 command! Spell set spell!
 
+" Format JSON
+
+command! JsonFormat %!jq .
+
 " When wrapped lines, don't skip the fake line
 nmap j gj
 nmap k gk
