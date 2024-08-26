@@ -62,7 +62,7 @@ autocmd Filetype elixir setlocal foldmethod=expr foldexpr=FoldElixir(v:lnum)
 
 " Syntax highlight for Avro
 " Get file from https://github.com/apache/avro/blob/main/share/editors/avro-idl.vim
-au BufRead,BufNewFile *.avdl setlocal filetype=avro-idl
+au BufRead,BufNewFile *.avsc setlocal filetype=avro-idl
 
 " Folding vim-javascript
 "augroup javascript_folding
@@ -313,7 +313,9 @@ vmap <C-n> :m'<-2<cr>`>my`<mzgv`yo`z
 " Buffer actions
 nmap <leader>n :bnext<CR>
 nmap <leader>b :bprevious<CR>
-nmap <leader>x :bdelete<CR>
+
+command! SmartBdelete call SmartBdelete()
+nmap <leader>x :SmartBdelete<CR>
 
 " Resizing the window
 " ˙ == ALT + h
@@ -408,6 +410,24 @@ augroup csharp_mappings
     autocmd!
     autocmd FileType cs nnoremap <buffer> <C-o><C-i> :OmniSharpGotoImplementation<CR>
 augroup END
+
+" Function to delete the current buffer, but keep the window open if NERDTree is open
+function! SmartBdelete()
+  " Check if NERDTree is open
+  if exists("t:NERDTreeBufName")
+    " Get the current buffer number
+    let l:cur_buf = bufnr('%')
+
+    " Open a new empty buffer
+    enew
+
+    " Delete the previously active buffer
+    execute 'bdelete' l:cur_buf
+  else
+    " If NERDTree is not open, simply delete the buffer
+    bdelete
+  endif
+endfunction
 
 "Setup yaml files
 "https://www.vim.org/scripts/script.php?script_id=739
