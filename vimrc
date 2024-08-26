@@ -5,19 +5,19 @@ Plug 'scrooloose/nerdtree'
 Plug 'elixir-lang/vim-elixir'
 Plug 'tpope/vim-endwise'
 Plug 'eugen0329/vim-esearch' "To make this work, install the silver surfer searcher (ag)
-Plug 'srstevenson/vim-topiary'
+Plug 'srstevenson/vim-topiary' " Remove whitespace
 Plug 'bling/vim-bufferline'
 Plug 'previm/previm'
 Plug 'mhinz/vim-mix-format'
-Plug 'pangloss/vim-javascript'
+"Plug 'pangloss/vim-javascript'
 " Plug 'leafgarland/typescript-vim'
 " Plug 'peitalin/vim-jsx-typescript'
-Plug 'maxmellon/vim-jsx-pretty'
+"Plug 'maxmellon/vim-jsx-pretty'
 Plug 'gabrielelana/vim-markdown'
-Plug 'skywind3000/asyncrun.vim'
+"Plug 'skywind3000/asyncrun.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-Plug 'kchmck/vim-coffee-script'
+"Plug 'kchmck/vim-coffee-script'
 Plug 'vim-utils/vim-ruby-fold'
 Plug 'wesQ3/vim-windowswap'
 Plug 'gcmt/taboo.vim'
@@ -25,9 +25,11 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'rhysd/vim-syntax-codeowners'
 Plug 'hashivim/vim-terraform'
-Plug 'martinda/Jenkinsfile-vim-syntax'
+"Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'vim-python/python-syntax'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
+Plug 'OmniSharp/omnisharp-vim'
 
 call plug#end()
 
@@ -49,17 +51,29 @@ set splitright
 " Split below
 set splitbelow
 
+" Next 3 lines, I have no idea but witout this, typescript files are very slow
+" https://stackoverflow.com/questions/69145357/vim-almost-hangs-with-100-line-typescript-file
+set regexpengine=0
+syntax on
+filetype plugin indent on
+
 " Folding for elixir files
 autocmd Filetype elixir setlocal foldmethod=expr foldexpr=FoldElixir(v:lnum)
 
+" Syntax highlight for Avro
+" Get file from https://github.com/apache/avro/blob/main/share/editors/avro-idl.vim
+au BufRead,BufNewFile *.avdl setlocal filetype=avro-idl
+
 " Folding vim-javascript
-augroup javascript_folding
-    au!
-    au FileType javascript setlocal foldmethod=syntax
-augroup END
+"augroup javascript_folding
+"    au!
+"    au FileType javascript setlocal foldmethod=syntax
+"augroup END
 
 " Don't delete empty lines for yaml files
-autocmd Filetype yaml,sql TopiaryDisableBuffer
+autocmd Filetype yaml,sql,python TopiaryDisableBuffer
+
+let g:topiary_ft_allow_two_blank_lines = ['python', 'cfg']
 
 " Return to last edit position when opening files (You want this!) Credit: Felipe Renan
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -74,10 +88,13 @@ hi Folded ctermbg=232
 set nofoldenable
 
 "wrap text for markdown
-au BufRead,BufNewFile *.md setlocal textwidth=120
+au BufRead,BufNewFile *.md setlocal textwidth=80
 
 " Set filetype for my personal zshrc
 au BufRead .zshrc-custom setfiletype zsh
+
+" .tpl are yaml
+autocmd BufRead,BufNewFile *.tpl set filetype=yaml
 
 " Delimit git commits for its content
 " it is meant to be used with the command `git commit -m "Title" -e
@@ -118,7 +135,7 @@ ab rpry require 'pry'<CR>binding.pry
 ab jlog console.log("
 
 " Automatically open NERDTree unless file is on `filetypeToIgnore`
-let filetypeToIgnore = ['gitcommit', 'zsh']
+let filetypeToIgnore = ['gitcommit', 'zsh', 'blank']
 autocmd vimenter * if index(filetypeToIgnore, &ft) < 0 | NERDTree
 
 let NERDTreeShowLineNumbers=1
@@ -142,6 +159,14 @@ let g:esearch = {
 let g:esearch.name = '[esearch]'
 let g:esearch.win_new = {esearch -> esearch#buf#goto_or_open(esearch.name, 'vne')}
 let g:esearch.live_update = 0
+
+"""""""""""""""""""
+""""" PYTHON """"""
+"""""""""""""""""""
+
+let g:python_highlight_all = 1
+
+"""""""""""""""
 
 "organize .swp files
 if !isdirectory($HOME . "/.vim/tmp")
@@ -323,6 +348,9 @@ nmap <leader>gd <leader>ar git diff<CR>
 " insert date
 nmap <leader>d :r! date<CR>
 
+"search and replace from visual mode
+vmap <leader>s y:%s/getreg("\"")/
+
 " Window swapping
 let g:windowswap_map_keys = 0 "prevent default bindings
 nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<CR>
@@ -374,6 +402,12 @@ function! FoldElixir(lnum)
 		return '='
 	endif
 endfunction
+
+" C# mappings
+augroup csharp_mappings
+    autocmd!
+    autocmd FileType cs nnoremap <buffer> <C-o><C-i> :OmniSharpGotoImplementation<CR>
+augroup END
 
 "Setup yaml files
 "https://www.vim.org/scripts/script.php?script_id=739

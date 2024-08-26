@@ -20,3 +20,14 @@ killbranch() {
 
   echo "Done"
 }
+
+keepawake() {
+ launchctl load ~/Library/LaunchAgents/ticker.plist
+ echo "Yes sir!"
+ vim -c "set filetype=blank" -c "startinsert"
+}
+
+youcansleepnow() {
+ launchctl unload ~/Library/LaunchAgents/ticker.plist
+ echo "Thank you"
+}
