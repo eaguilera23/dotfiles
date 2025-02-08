@@ -21,13 +21,13 @@ killbranch() {
   echo "Done"
 }
 
-keepawake() {
- launchctl load ~/Library/LaunchAgents/ticker.plist
+pomodoro() {
+ launchctl load ~/Library/LaunchAgents/pomodoro.plist
  echo "Yes sir!"
  vim -c "set filetype=blank" -c "startinsert"
 }
 
-youcansleepnow() {
- launchctl unload ~/Library/LaunchAgents/ticker.plist
+killpomodoro() {
+ launchctl unload ~/Library/LaunchAgents/pomodoro.plist
  echo "Thank you"
 }
