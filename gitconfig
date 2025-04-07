@@ -1,23 +1,5 @@
+[init]
+	defaultBranch = master
 [user]
 	name = Eduardo Aguilera
 	email = laloao.2302@gmail.com
-[push]
-	default = current
-[merge]
-	conflictstyle = diff3
-[core]
-	excludesfile = /Users/eduardoaguileraolascoaga/.gitignore_global
-  pager = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less
-	editor = /usr/bin/vim
-[init]
-	defaultBranch = master
-[githooks]
-	cloneUrl = https://github.com/rycus86/githooks.git
-	cloneBranch = master
-	shared = no
-[alias]
-	hooks = !\"/Users/eduardoaguileraolascoaga/.githooks/bin/githooks\"
-[githooks "autoupdate"]
-	lastrun = 1626425487
-[pull]
-	rebase = true
