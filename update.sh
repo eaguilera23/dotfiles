@@ -11,12 +11,6 @@ cd ~/dotfiles
 echo "Adding vimrc"
 cp ~/.vimrc ~/dotfiles/vimrc
 
-echo "Adding .gitconfig"
-cp ~/.gitconfig ~/dotfiles/gitconfig
-
-echo "Adding personal zshrc"
-cp ~/.zshrc-custom ~/dotfiles/zshrc-custom
-
 git add .
 
 echo "What is your update?"
