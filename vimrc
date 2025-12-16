@@ -80,7 +80,7 @@ au BufRead,BufNewFile COMMIT_EDITMSG setlocal colorcolumn=73
 
 " NERDTree Configuration
 let filetypeToIgnore = ['gitcommit', 'zsh', 'blank']
-autocmd vimenter * if index(filetypeToIgnore, &ft) < 0 | NERDTree
+autocmd vimenter * if index(filetypeToIgnore, &ft) < 0 | NERDTree | endif
 let NERDTreeShowLineNumbers=1
 let g:NERDTreeNodeDelimiter = "\u00a0" " Bug that makes ^G to appear
 if isdirectory(expand(".git"))
@@ -120,6 +120,7 @@ nmap <F3> :SessionLoad<CR>
 nmap <leader>o ddO
 nmap <leader>t :tabnew<CR><F1>
 nmap <leader>q :tabclose<CR>
+map <S-q> :q<CR>
 nmap <leader>1 1gt
 nmap <leader>2 2gt
 nmap <leader>3 3gt
@@ -133,7 +134,7 @@ nmap <leader>r :set relativenumber!<Bar>set number!<CR>
 nmap <leader>mw <C-W>
 nmap <leader>n :bnext<CR>
 nmap <leader>b :bprevious<CR>
-nmap <leader>x :SmartBdelete<CR>
+nmap <leader>x :call SmartBdelete()<CR>
 nmap <leader>* :%s/<c-r><c-w>//g<left><left>
 nmap <leader># ^i#<Esc>
 vmap <leader>3 I#<Esc>
@@ -178,7 +179,7 @@ function FuncSaveSession()
   let current_directory = getcwd()
   let session_name = session_path . substitute(current_directory, "/", "_", "g") . ".vim"
   echo session_name
-  execute "mks!" . session_name
+  execute "mks! " . session_name
 endfunction
 
 function FuncLoadSession()
@@ -186,7 +187,7 @@ function FuncLoadSession()
   let current_directory = getcwd()
   let session_name = session_path . substitute(current_directory, "/", "_", "g") . ".vim"
   echo session_name
-  execute "source" . session_name
+  execute "source " . session_name
 endfunction
 
 " Fold Documentation in Elixir Projects
